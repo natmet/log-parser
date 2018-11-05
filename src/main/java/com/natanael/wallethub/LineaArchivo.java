@@ -10,9 +10,7 @@ public class LineaArchivo {
     private int codigoEstatus;
     private String userAgent;
 
-    public LineaArchivo() {
-    }
-
+    
     public LineaArchivo(LocalDateTime fecha, String ip, String metodoHttp, int codigoEstatus, String userAgent) {
         this.fecha = fecha;
         this.ip = ip;
@@ -21,7 +19,7 @@ public class LineaArchivo {
         this.userAgent = userAgent;
     }
 
-    public LocalDateTime getFecha() {
+	public LocalDateTime getFecha() {
         return fecha;
     }
 
