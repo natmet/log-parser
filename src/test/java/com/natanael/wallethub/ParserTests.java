@@ -27,9 +27,9 @@ public class ParserTests {
         LineaArchivo lineaArchivo = parser.convertirString(cadena);
         assertEquals(LocalDateTime.of(2017, 1, 1, 0, 1, 10, 315000000), lineaArchivo.getFecha());
         assertEquals("192.168.14.43", lineaArchivo.getIp());
-        assertEquals("GET / HTTP/1.1", lineaArchivo.getMetodoHttp());
+        assertEquals("\"GET / HTTP/1.1\"", lineaArchivo.getMetodoHttp());
         assertEquals(200, lineaArchivo.getCodigoEstatus());
-        assertEquals("Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Trident/5.0)", lineaArchivo.getUserAgent());
+        assertEquals("\"Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Trident/5.0)\"", lineaArchivo.getUserAgent());
     }
 
 }
