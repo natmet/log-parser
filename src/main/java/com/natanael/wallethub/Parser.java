@@ -13,9 +13,6 @@ import java.util.Scanner;
 
 public class Parser {
 
-	
-	
-	
 	// localizar el archivo
 	public LineaArchivo convertirString(String cadena) {
 		String[] arreglo = cadena.split("\\|");
@@ -31,14 +28,14 @@ public class Parser {
 	public static void main(String[] args) {
 		
 		Parser ps = new Parser();
-		try {
+		/*try {
 			ps.leerLineaArchivo();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
-		//Leer los datos del archivo, guardarlos en un string y imprimirlos
-		File archivo = new File("nato.txt");
+		}*/
+		
+		File archivo = new File("access.log");
 		
 		try {
 			ps.imprimirTextoArchivo(archivo);
@@ -47,25 +44,31 @@ public class Parser {
 			e.printStackTrace();
 		}
 	}
+	//Leer los datos del archivo, guardarlos en un string y imprimirlos
 	//Leer Archivo log y imprimir las 5 primeras lineas.
+	
 	public void imprimirTextoArchivo(File file) throws IOException {
-		
+		//Impresion de las 5 primeras lineas
 		FileReader fr = new FileReader(file);
 		BufferedReader br = new BufferedReader(fr);
-		String nombre = br.readLine();
-		System.out.println(nombre);
+		String nombre ;
+		//imprimiendo las primero 5 lineas
+		for(int x=0;x<5;x++) {
+			nombre = br.readLine();
+		    System.out.println(nombre);
+		}
+		
 		br.close();
 	}
 	
-	public void leerLineaArchivo( ) throws IOException {
+	/*public void leerLineaArchivo( ) throws IOException {
 		File archivo = new File("nato.txt");
-		
 		FileOutputStream fo = new FileOutputStream(archivo);
-		String nombre ="natanael";
+		String nombre ="JAVA";
 		fo.write(nombre.getBytes());
 		fo.close();
 		
-	}
+	}*/
 	
 		
 	//Hacer un metodo de parser, que lea un archivo y crea 5 objetos LineaArchivo con las primeras 5 lineas del archivo.
