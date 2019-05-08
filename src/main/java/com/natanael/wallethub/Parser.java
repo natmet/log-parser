@@ -11,12 +11,23 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
+import org.springframework.stereotype.Service;
+
+@Service
 public class Parser {
+
+	private LineaArchivoRepository lr;
+
+	// Inyeccion de dependecia
+	public Parser(LineaArchivoRepository lr) {
+		super();
+		this.lr = lr;
+	}
 
 	// localizar el archivo
 	public LineaArchivo convertirString(String cadena) {
 		String[] arreglo = cadena.split("\\|");
-		 DateTimeFormatter formato = DateTimeFormatter.ofPattern("yyyy-mm-dd HH:MM:ss.SSS");
+		DateTimeFormatter formato = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS");
 		// DateTimeFormatter formato = DateTimeFormatter.ISO_DATE_TIME;
 		LocalDateTime fecha = LocalDateTime.parse(arreglo[0], formato);
 		int estatus = Integer.parseInt(arreglo[3]);
@@ -25,62 +36,59 @@ public class Parser {
 		return lineaArchivo;
 	}
 
-	public static void main(String[] args) {
-		
-		Parser ps = new Parser();
-		/*try {
-			ps.leerLineaArchivo();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}*/
-		
-		File archivo = new File("access.log");
-		
-		try {
-			ps.imprimirTextoArchivo(archivo);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+	/**
+	 * Toma un archivo de logs, lo procesa linea por linea y graba cada linea en la
+	 * base de datos.
+	 * 
+	 * @param archivo el archivo a procesar
+	 * @throws IOException si no encuentra el archivo, o hay un error leyendolo
+	 */
+	public void procesarArchivo(File archivo) throws IOException {
+		FileReader fr = new FileReader(archivo);
+		BufferedReader br = new BufferedReader(fr);
+		String linea;
+		for (int x = 0; x < 100; x++) {
+			linea = br.readLine();
+			LineaArchivo ln2 = convertirString(linea);
+			lr.save(ln2);
 		}
+		
 	}
-	//Leer los datos del archivo, guardarlos en un string y imprimirlos
-	//Leer Archivo log y imprimir las 5 primeras lineas.
-	
+
+	// Leer los datos del archivo, guardarlos en un string y imprimirlos
+	// Leer Archivo log y imprimir las 5 primeras lineas.
+
 	public void imprimirTextoArchivo(File file) throws IOException {
-		//Impresion de las 5 primeras lineas
+		// Impresion de las 5 primeras lineas
+
+		// imprimiendo las primero 5 lineas
 		FileReader fr = new FileReader(file);
 		BufferedReader br = new BufferedReader(fr);
-		String nombre ;
-		//imprimiendo las primero 5 lineas
-		for(int x=0;x<5;x++) {
-			nombre = br.readLine();
-		    System.out.println(nombre);
+		String linea;
+		for (int x = 0; x < 5; x++) {
+			
+			linea = br.readLine();
+			LineaArchivo ln = convertirString(linea);
+			System.out.println(linea);
 		}
-		
+
 		br.close();
+
 	}
-	
-	/*public void leerLineaArchivo( ) throws IOException {
-		File archivo = new File("nato.txt");
-		FileOutputStream fo = new FileOutputStream(archivo);
-		String nombre ="JAVA";
-		fo.write(nombre.getBytes());
-		fo.close();
-		
-	}*/
-	
-		
-	//Hacer un metodo de parser, que lea un archivo y crea 5 objetos LineaArchivo con las primeras 5 lineas del archivo.
-	
-	
-	
-	
-	
+
+	/*
+	 * public void leerLineaArchivo( ) throws IOException { File archivo = new
+	 * File("nato.txt"); FileOutputStream fo = new FileOutputStream(archivo); String
+	 * nombre ="JAVA"; fo.write(nombre.getBytes()); fo.close();
+	 * 
+	 * }
+	 */
+
+	// Hacer un metodo de parser, que lea un archivo y crea 5 objetos LineaArchivo
+	// con las primeras 5 lineas del archivo.
+
 	// leer el archivo
-	
-	
-	
+
 	// leer cada linea y guardarla en una base de datos
 
 }

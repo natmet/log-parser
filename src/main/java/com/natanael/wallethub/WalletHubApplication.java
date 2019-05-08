@@ -1,20 +1,36 @@
 package com.natanael.wallethub;
 
+import java.io.File;
+
+import org.springframework.boot.ApplicationArguments;
+import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-
+//lograr que H2 cree la base de dato, se conecte y cree la tabla automaticamente.
 @SpringBootApplication
-public class WalletHubApplication {
+public class WalletHubApplication implements ApplicationRunner {
 
+	private Parser ps;
 	
-	
+	public WalletHubApplication(Parser ps) {
+		this.ps = ps;
+	}
+
 	public static void main(String[] args) {
-		Parser parse = new Parser();
-		String cadena = "2018-11-04 00:10:30.315|192.168.14.43|\"GET / HTTP/1.1\"|200|\"Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Trident/5.0)\"";
-	
-		LineaArchivo ts= parse.convertirString(cadena);	
-		System.out.println("La fecha fue: "+ts.getFecha()+" La IP es: "+ts.getFecha()+" El metodo es :"+ts.getMetodoHttp()+" El estatus: "+ts.getCodigoEstatus()+" El navegador es: "+ts.getUserAgent());	
+		SpringApplication.run(WalletHubApplication.class, args);
 			
+		
+		
+		
+		
+
+	}
+
+	@Override
+	public void run(ApplicationArguments args) throws Exception {
+		File file = new File("access.log");
+		ps.procesarArchivo(file);
+		
 		
 		
 	}

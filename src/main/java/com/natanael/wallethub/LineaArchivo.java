@@ -2,16 +2,29 @@ package com.natanael.wallethub;
 
 import java.time.LocalDateTime;
 
-public class LineaArchivo {
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
-    private LocalDateTime fecha;
+@Entity
+@Table
+public class LineaArchivo {
+	
+	@Id
+	@GeneratedValue
+	private Long id;
+	private LocalDateTime fecha;
     private String ip;
     private String metodoHttp;
     private int codigoEstatus;
     private String userAgent;
 
     
-    public LineaArchivo(LocalDateTime fecha, String ip, String metodoHttp, int codigoEstatus, String userAgent) {
+    public LineaArchivo() {
+	}
+
+	public LineaArchivo(LocalDateTime fecha, String ip, String metodoHttp, int codigoEstatus, String userAgent) {
         this.fecha = fecha;
         this.ip = ip;
         this.metodoHttp = metodoHttp;
@@ -58,4 +71,11 @@ public class LineaArchivo {
     public void setUserAgent(String userAgent) {
         this.userAgent = userAgent;
     }
+    public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
 }
