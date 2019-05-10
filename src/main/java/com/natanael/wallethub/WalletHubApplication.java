@@ -17,13 +17,9 @@ public class WalletHubApplication implements ApplicationRunner {
 	}
 
 	public static void main(String[] args) {
-		SpringApplication.run(WalletHubApplication.class, args);
-			
+		SpringApplication.run(WalletHubApplication.class, args);		
 		
 		
-		
-		
-
 	}
 
 	@Override

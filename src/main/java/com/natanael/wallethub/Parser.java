@@ -16,6 +16,11 @@ import org.springframework.stereotype.Service;
 @Service
 public class Parser {
 
+	LocalDateTime time = LocalDateTime.now();
+	int hour = time.getHour();
+	int minutes = time.getMinute();
+	int seconds = time.getSecond();
+
 	private LineaArchivoRepository lr;
 
 	// Inyeccion de dependecia
@@ -44,15 +49,20 @@ public class Parser {
 	 * @throws IOException si no encuentra el archivo, o hay un error leyendolo
 	 */
 	public void procesarArchivo(File archivo) throws IOException {
+
 		FileReader fr = new FileReader(archivo);
 		BufferedReader br = new BufferedReader(fr);
 		String linea;
-		for (int x = 0; x < 100; x++) {
-			linea = br.readLine();
+		System.out.println("La hora de inicio es" + hour + minutes + seconds);
+		while ((linea = br.readLine()) != null) {
+
 			LineaArchivo ln2 = convertirString(linea);
 			lr.save(ln2);
+			// saltar proxima linea
+			linea = linea + 1;
 		}
-		
+		br.close();
+		System.out.println("La hora de finalizacion es" + hour + minutes + seconds);
 	}
 
 	// Leer los datos del archivo, guardarlos en un string y imprimirlos
@@ -66,7 +76,7 @@ public class Parser {
 		BufferedReader br = new BufferedReader(fr);
 		String linea;
 		for (int x = 0; x < 5; x++) {
-			
+
 			linea = br.readLine();
 			LineaArchivo ln = convertirString(linea);
 			System.out.println(linea);
