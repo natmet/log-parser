@@ -3,5 +3,5 @@ spring:
     driver-class-name: org.h2.Driver    url: jdbc:h2:mem:./mydb
     username: 
     password:
-  jpa:    generate-ddl: true    hibernate:      ddl-auto: update    show-sql: true
-  h2:    console:      enabled: true
+  jpa:    generate-ddl: true    hibernate:      ddl-auto: create    show-sql: true
+  h2:    console:      enabled: false

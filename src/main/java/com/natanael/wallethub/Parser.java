@@ -53,7 +53,7 @@ public class Parser {
 		FileReader fr = new FileReader(archivo);
 		BufferedReader br = new BufferedReader(fr);
 		String linea;
-		System.out.println("La hora de inicio es" + hour + minutes + seconds);
+		System.out.println("La hora de inicio es" + hour + " : " + " : " + minutes + " : " + seconds);
 		while ((linea = br.readLine()) != null) {
 
 			LineaArchivo ln2 = convertirString(linea);
@@ -62,7 +62,15 @@ public class Parser {
 			linea = linea + 1;
 		}
 		br.close();
-		System.out.println("La hora de finalizacion es" + hour + minutes + seconds);
+		System.out.println("La hora de finalizacion es " + hour + " : " + " : " + minutes + " : " + seconds);
+	}
+
+	public void procesarArchivo(File file, LocalDateTime startTime, String duration, int threshold) {
+		//Java Stream API 
+		//Diferencias entre un array list y un linked list
+		//Generics
+		//Estructura de datos
+		
 	}
 
 	// Leer los datos del archivo, guardarlos en un string y imprimirlos
