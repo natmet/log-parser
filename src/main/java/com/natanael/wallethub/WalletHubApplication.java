@@ -38,22 +38,24 @@ public class WalletHubApplication implements ApplicationRunner {
 		int threshold = 100;
 
 		if (args.containsOption("startDate")) {
-			// System.out.println(args.getOptionValues("duration").get(0));
+			System.out.println(args.getOptionValues("duration").get(0));
 			DateTimeFormatter formato = DateTimeFormatter.ofPattern("yyyy-MM-dd.HH:mm:ss");
 			startDate = LocalDateTime.parse(args.getOptionValues("startDate").get(0), formato);
-
 		}
 
 		if (args.containsOption("duration")) {
-			// System.out.println(args.getOptionValues("duration").get(0));
+			System.out.println(args.getOptionValues("duration").get(0));
 			duration = args.getOptionValues("duration").get(0);
 		}
 
 		if (args.containsOption("threshold")) {
-			// System.out.println(args.getOptionValues("duration").get(0));
+			System.out.println(args.getOptionValues("duration").get(0));
 			threshold = Integer.parseInt(args.getOptionValues("threshold").get(0));
 		}
-
+		
+		//Meter cada linea del file en un Stream, filtrar por los parametro recibidos
 		ps.procesarArchivo(file, startDate, duration, threshold);
+		
+		
 	}
 }

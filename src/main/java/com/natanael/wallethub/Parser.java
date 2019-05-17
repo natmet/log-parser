@@ -65,11 +65,22 @@ public class Parser {
 		System.out.println("La hora de finalizacion es " + hour + " : " + " : " + minutes + " : " + seconds);
 	}
 
-	public void procesarArchivo(File file, LocalDateTime startTime, String duration, int threshold) {
+	
+	//Crear nuevo metodo procesar archivo, y hacer que filtre por las opciones entrantes
+	public void procesarArchivo(File file, LocalDateTime startTime, String duration, int threshold) throws FileNotFoundException {
+	
+		
+		FileReader fr = new FileReader(file);
+		BufferedReader br = new BufferedReader(fr);
+		
+		//Convertir archivo en Streams 
+		
+		
+		//Estructura de datos
 		//Java Stream API 
 		//Diferencias entre un array list y un linked list
 		//Generics
-		//Estructura de datos
+		
 		
 	}
 
